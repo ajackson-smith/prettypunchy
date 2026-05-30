@@ -1,1 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretty Punchy Stage & Screen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter+Tight:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'True Lies';
+      src: url('assets/True_Lies.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #e93b1a;
+      --black: #111;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter Tight', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===================== NAV ===================== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--black);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    nav .logo svg { height: 28px; display: block; }
+
+    nav .links {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    nav .links a {
+      font-size: 14px;
+      color: var(--orange);
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    nav .links a:hover { opacity: 0.7; }
+
+    nav .links a.cta {
+      background: var(--orange);
+      color: var(--white);
+      padding: 4px 12px;
+    }
+
+    /* ===================== SECTIONS ===================== */
+    .section { display: none; min-height: 100vh; padding-top: 64px; }
+    .section.active { display: block; }
+
+    /* ===================== HOME ===================== */
+
+    /* Animation panel */
+    #anim-panel {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      height: calc(100vh - 52px);
+    }
+
+    #anim-panel video {
+      max-width: 100%;
+      max-height: 100%;
+      cursor: pointer;
+    }
+
+    #anim-panel .skip-btn {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Inter Tight', sans-serif;
+      transition: color 0.2s;
+    }
+
+    #anim-panel .skip-btn:hover { color: rgba(255,255,255,0.8); }
+
+    /* Hero */
+    #hero {
+      background: var(--orange);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #hero .starburst-wrap {
+      height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    #hero .starburst { width: 90vh; height: 90vh; flex-shrink: 0; }
+
+    #hero .title-wrap {
+      padding: 60px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #hero .title-block { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+
+    #hero .pretty, #hero .punchy {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(80px, 14vw, 140px);
+      color: var(--white);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    #hero .stage-screen {
+      font-family: 'Inter Tight', sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 56px);
+      color: #000;
+      line-height: 1;
+      margin-top: 12px;
+      letter-spacing: 0.22em;
+    }
+
+    #hero .tagline {
+      font-family: 'Inter Tight', sans-serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 26px);
+      color: var(--white);
+      margin-top: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Who We Are */
+    #who {
+      background: var(--black);
+      padding: 80px;
+    }
+
+    #who p {
+      font-size: 22px;
+      line-height: 1.9;
+      color: var(--white);
+    }
+
+    #who p + p { margin-top: 20px; }
+
+    #who .pp-bold {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+    }
+
+    #who .bees-knees {
+      font-style: normal;
+      color: var(--white);
+    }
+
+    /* Project Cards */
+    #cards {
+      background: #1a1a1a;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .card {
+      padding: 48px;
+      border-top: 1px solid #222;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .card:first-child { border-right: 1px solid #222; }
+    .card:hover { background: #222; }
+
+    .card .label {
+      font-size: 11px;
+      color: var(--orange);
+      letter-spacing: 0.14em;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* GET IN TOUCH button */
+    #home-cta {
+      background: var(--orange);
+      padding: 64px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    /* ===================== ABOUT US ===================== */
+    #about .about-inner {
+      background: var(--orange);
+      padding: 48px 80px 48px;
+      min-height: calc(100vh - 64px);
+    }
+
+    #about .polaroid-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    #about .polaroid {
+      background: var(--white);
+      padding: 16px 16px 40px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    #about .polaroid img {
+      width: 100%;
+      display: block;
+      max-height: 420px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    #about .polaroid .name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--orange);
+      text-align: center;
+      margin-top: 20px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    #about .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    #about .bio {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+    }
+
+    #about .bio p {
+      font-size: 15px;
+      color: var(--white);
+      line-height: 1.8;
+      width: 100%;
+    }
+
+    #about .bio a {
+      margin-top: 24px;
+    }
+
+    /* ===================== THE WORK ===================== */
+
+    #work .work-hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    #work .work-hero img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.8);
+    }
+
+    #work .work-title {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+      width: 28vw !important;
+      max-width: 28vw !important;
+    }
+
+    #work .work-title img {
+      width: 28vw !important;
+      max-width: 28vw !important;
+      display: block;
+    }
+
+    #work .synopsis {
+      background: var(--black);
+      padding: 80px;
+      max-width: 100%;
+    }
+
+    #work .synopsis p {
+      font-size: 18px;
+      color: var(--white);
+      line-height: 1.9;
+    }
+
+    #work .synopsis p + p { margin-top: 20px; }
+
+    #work .synopsis .mr-theatre-bold {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: inherit;
+    }
+
+    #work .panoramic {
+      width: 100%;
+      line-height: 0;
+    }
+
+    #work .panoramic img {
+      width: 100%;
+      display: block;
+    }
+
+    #work .video-section {
+      background: var(--black);
+      padding: 80px;
+      text-align: center;
+    }
+
+    #work .video-section h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 0.16em;
+      color: var(--orange);
+      margin-bottom: 32px;
+    }
+
+    #work .video-placeholder {
+      background: #1a1a1a;
+      aspect-ratio: 16/9;
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+    }
+
+    #work .poster-awards {
+      background: var(--black);
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 0.6fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    #work .poster-awards img {
+      width: 100%;
+      display: block;
+    }
+
+    #work .awards h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 0.16em;
+      color: var(--orange);
+      margin-bottom: 32px;
+    }
+
+    #work .awards ul {
+      list-style: none;
+    }
+
+    #work .awards ul li {
+      font-size: 17px;
+      color: var(--white);
+      line-height: 1.5;
+      padding: 12px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    #work .awards ul li:first-child { border-top: 1px solid #1a1a1a; }
+
+    #work .awards ul li em { font-style: italic; }
+    #work .awards ul li strong { font-weight: 700; }
+
+    #work .credits-section {
+      background: var(--black);
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    #work .credits h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 0.16em;
+      color: var(--orange);
+      margin-bottom: 32px;
+    }
+
+    #work .credits dl { }
+
+    #work .credits dt {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--orange);
+      letter-spacing: 0.06em;
+      margin-top: 20px;
+    }
+
+    #work .credits dt:first-child { margin-top: 0; }
+
+    #work .credits dd {
+      font-size: 15px;
+      color: var(--white);
+      line-height: 1.7;
+      margin-top: 4px;
+    }
+
+    #work .credits-img img {
+      width: 100%;
+      display: block;
+    }
+
+    #work .taf-section {
+      background: var(--black);
+      padding: 80px;
+      text-align: center;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    #work .taf-section p.taf-line1 {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      color: var(--white);
+      font-style: italic;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    #work .taf-section p.taf-line2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--orange);
+      letter-spacing: 0.06em;
+    }
+
+    /* ===================== HIT US UP ===================== */
+    #contact .contact-inner {
+      background: var(--black);
+      min-height: calc(100vh - 52px);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 32px;
+    }
+
+    #contact h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(40px, 6vw, 72px);
+      color: var(--orange);
+      letter-spacing: -0.02em;
+    }
+
+    #contact .contact-line {
+      font-style: italic;
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    #contact a.email {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(18px, 2.5vw, 28px);
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    #contact a.email:hover { color: var(--orange); }
+
+    #contact .anim-loop {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 32px;
+    }
+
+    #contact .anim-loop video {
+      width: 100%;
+      display: block;
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--black);
+      padding: 16px 28px;
+      text-align: center;
+      font-size: 9px;
+      color: #333;
+      letter-spacing: 0.1em;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      #who { padding: 48px 24px; }
+      #cards { grid-template-columns: 1fr; }
+      .card:first-child { border-right: none; border-bottom: 1px solid #222; }
+      #about .about-inner { padding: 48px 24px; }
+      #about .polaroid-grid, #about .bio-grid { grid-template-columns: 1fr; }
+      #work .synopsis { padding: 48px 24px; }
+      #work .poster-awards { grid-template-columns: 1fr; padding: 48px 24px; }
+      #work .credits-section { grid-template-columns: 1fr; padding: 48px 24px; }
+      #work .taf-section { padding: 48px 24px; }
+      #contact .contact-inner { padding: 48px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <nav>
+    <div class="logo" onclick="showSection('home')" style="cursor:pointer;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2928.88 540" aria-label="Pretty Punchy">
+        <defs><style>.cls-1{fill:#e94e25;}</style></defs>
+        <g><g><g><g>
+          <path class="cls-1" d="M677.51,145.49H604.06V402.37H645.4V309.73h32.11c40.23,0,73.07-32.85,73.07-73.44V218.94C750.58,178.71,717.74,145.49,677.51,145.49Zm32.85,90.8a33,33,0,0,1-32.85,33.21H645.4V185.72h32.11c18.09,0,32.85,15.13,32.85,33.22Z"/>
+          <path class="cls-1" d="M869.22,303.83A73.43,73.43,0,0,0,922,233.33V218.57a73.25,73.25,0,0,0-73.08-73.08H775.47V402.37H816.8V306.78h3.7l72.34,95.59h50.93ZM816.8,266.55V185.72h32.12a32.92,32.92,0,0,1,32.84,32.85v14.76c0,18.09-14.76,33.22-32.84,33.22Z"/>
+          <path class="cls-1" d="M974.14,145.12V402h47.24l102.85-.74V359.93l-102.85.73v-66.8l82.55-.37V252.16l-82.55.73v-66.8l103.22-.74V144Z"/>
+          <path class="cls-1" d="M1146.57,145.49v41.34h65.24V402.37h41.33V186.83h65.24V145.49Z"/>
+          <path class="cls-1" d="M1339.29,145.49v41.34h65.24V402.37h41.33V186.83h65.24V145.49Z"/>
+        </g>
+        <polygon class="cls-1" points="1645.35 144.69 1608.43 235.68 1571.88 144.69 1527.13 144.69 1587.92 294.98 1587.92 404.24 1629.31 404.24 1629.31 294.98 1690.47 144.69 1645.35 144.69"/></g>
+        <g><g>
+          <path class="cls-1" d="M1864.18,145.09h-73.44V402h41.34V309.32h32.1c40.24,0,73.08-32.85,73.08-73.45V218.53C1937.26,178.29,1904.42,145.09,1864.18,145.09ZM1897,235.87a33,33,0,0,1-32.86,33.22h-32.1V185.31h32.1c18.1,0,32.86,15.14,32.86,33.22Z"/>
+          <path class="cls-1" d="M2078,144.71v186a30.08,30.08,0,0,1-29.9,30.26h-14.31a30.39,30.39,0,0,1-30.26-30.26v-186h-41.34v186c0,39.12,32.48,71.23,71.6,71.23h14.31a71.51,71.51,0,0,0,71.23-71.23v-186Z"/>
+          <polygon class="cls-1" points="2159.76 145.08 2159.76 401.96 2200.72 401.96 2200.72 243.26 2274.54 401.96 2315.51 401.96 2315.51 145.08 2274.17 145.08 2274.17 303.42 2201.09 145.08 2159.76 145.08"/>
+          <path class="cls-1" d="M2345.31,214.78V329.57c0,39.12,32.15,71.23,71.32,71.23h7.71c38.44,0,70.22-30.63,71.33-68.65h-41.39c-1.11,15.13-14.05,27.31-29.94,27.31h-7.71a30,30,0,0,1-29.93-29.89V214.78a30.1,30.1,0,0,1,29.93-30.26h7.71a30.43,30.43,0,0,1,30.31,30.26v19.93h41V214.78c0-39.12-32.16-71.23-71.33-71.23h-7.71C2377.46,143.55,2345.31,175.66,2345.31,214.78Z"/>
+          <polygon class="cls-1" points="2575.7 293.88 2648.04 293.88 2648.04 402.01 2695.29 402.01 2695.29 144.29 2648.04 144.29 2648.04 252.41 2575.7 252.41 2575.7 144.29 2528.46 144.29 2528.46 402.01 2575.7 402.01 2575.7 293.88"/>
+        </g>
+        <polygon class="cls-1" points="2832.79 143.83 2795.87 234.82 2759.32 143.83 2714.57 143.83 2775.36 294.12 2775.36 403.38 2816.75 403.38 2816.75 294.12 2877.91 143.83 2832.79 143.83"/></g>
+        <polygon class="cls-1" points="280.54 42.1 298.48 200.55 388.01 68.59 330.26 217.23 470.86 141.99 350.65 246.77 510.11 245.49 354.98 282.4 496.77 355.37 342.25 315.96 433.89 446.46 315.38 339.76 335.88 497.9 280.54 348.35 225.19 497.9 245.69 339.76 127.18 446.46 218.82 315.96 64.31 355.37 206.09 282.4 50.97 245.49 210.42 246.77 90.22 141.99 230.81 217.23 173.06 68.59 262.59 200.55 280.54 42.1"/></g></g>
+      </svg>
+    </div>
+    <div class="links">
+      <a href="#" onclick="showSection('about');return false;">ABOUT US</a>
+      <a href="#" onclick="showSection('work');return false;">THE WORK</a>
+      <a href="#" onclick="showSection('dev');return false;">IN DEVELOPMENT</a>
+      <a href="#" onclick="showSection('contact');return false;" class="cta">HIT US UP</a>
+    </div>
+  </nav>
+
+  <!-- ===================== HOME ===================== -->
+  <section id="home" class="section active">
+
+    <!-- Animation -->
+    <div id="anim-panel" style="position:relative;">
+      <video id="intro-video" autoplay muted playsinline>
+        <source src="assets/PP_animation_ineptic_mix_orange_star_2022.m4v" type="video/mp4">
+      </video>
+      <button class="skip-btn" onclick="skipAnim()">SKIP ▶</button>
+    </div>
+
+    <!-- Hero -->
+    <div id="hero">
+      <div class="starburst-wrap">
+        <svg class="starburst" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 779 811.7" aria-label="PP starburst">
+          <path d="M749.21,548.12,491.68,482.44l152.7,217.45L446.9,522.09l34.19,263.55L388.83,536.43,296.62,785.64l34.14-263.55L133.28,699.89,286,482.44,28.5,548.12l236.3-121.6L6.28,365,272,367.13,71.68,192.54,306,317.94,209.77,70.22,358.94,290.09l29.89-264,29.94,264L567.94,70.22,471.71,317.94,706,192.54,505.68,367.13,771.43,365,512.91,426.52Z" fill="#fff"/>
+          <path d="M367.54,382.57v9.54a18.22,18.22,0,0,1-18.09,18.31H331.81v-46.1h17.64A18.31,18.31,0,0,1,367.54,382.57ZM389.65,382.57a40.5,40.5,0,0,0-40.2-40.42H309V483.49h22.78V432.54h17.64a40.36,40.36,0,0,0,40.2-40.43Zm89,0a40.51,40.51,0,0,0-40.21-40.42H398V483.49H420.7V432.54h17.7a40.37,40.37,0,0,0,40.21-40.43Zm-22.17,0v9.54a18.17,18.17,0,0,1-18,18.31H420.7v-46.1h17.7A18.27,18.27,0,0,1,456.44,382.57Z" fill="#111"/>
+        </svg>
+      </div>
+      <div class="title-wrap">
+        <div class="title-block">
+          <p class="pretty">PRETTY</p>
+          <p class="punchy">PUNCHY</p>
+          <p class="stage-screen">STAGE &amp; SCREEN</p>
+        </div>
+        <p class="tagline">The gloves are off...</p>
+      </div>
+    </div>
+
+    <!-- Who We Are -->
+    <div id="who">
+      <p><span class="pp-bold">PRETTY PUNCHY</span> is a fleet-footed development suite combining original storytelling with the spirit of adventure.<br>Founded by Adam Jackson-Smith and Matt Pitts-Tucker to make funny things with serious craft, Pretty Punchy specialises in new writing and comedic adaptations for stage and screen.</p>
+    </div>
+
+    <!-- Project Cards -->
+    <div id="cards">
+      <div class="card" onclick="showSection('work')">
+        <p class="label">THE WORK</p>
+        <h3>Mr Theatre Comes Home Different</h3>
+        <p>Award-winning Short Film. Lyric Hammersmith, London.</p>
+      </div>
+      <div class="card" onclick="showSection('dev')">
+        <p class="label">IN DEVELOPMENT</p>
+        <h3>ZOMBSKI</h3>
+        <p>Feature Film. Comedy Horror. Coming soon.</p>
+      </div>
+    </div>
+
+    <!-- HIT US UP -->
+    <div id="home-cta">
+      <button onclick="showSection('contact')" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;letter-spacing:0.08em;color:#000;background:#fff;border:none;padding:18px 48px;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">GET IN TOUCH</button>
+    </div>
+
+    <footer>© PRETTY PUNCHY STAGE &amp; SCREEN</footer>
+  </section>
+
+  <!-- ===================== ABOUT US ===================== -->
+  <section id="about" class="section">
+    <div class="about-inner">
+
+      <!-- PP Logo -->
+      <div style="display:flex;justify-content:center;margin-bottom:48px;margin-top:-32px;">
+        <img src="assets/PP_logo_white.svg" alt="Pretty Punchy Stage & Screen" style="height:200px;display:block;">
+      </div>
+
+      <div class="polaroid-grid">
+        <div>
+          <div class="polaroid">
+            <img src="assets/AJS.webp" alt="Adam Jackson-Smith">
+            <p class="name">ADAM JACKSON-SMITH</p>
+          </div>
+        </div>
+        <div>
+          <div class="polaroid">
+            <img src="assets/MPT.webp" alt="Matt Pitts-Tucker">
+            <p class="name">MATT PITTS-TUCKER</p>
+          </div>
+        </div>
+      </div>
+      <div class="bio-grid">
+        <div class="bio">
+          <p>Adam is an actor, writer &amp; director. He trained at RADA and has been working on Stage &amp; Screen for over fifteen years.</p>
+          <p style="margin-top:20px;">Adam originated the role of Basil Fawlty in the West End production of John Cleese's Fawlty Towers: The Play and is currently working on the follow up. Other credits include Outlander, FBI: International, The Unlikely Pilgrimage of Harold Fry, and Master Of None.</p>
+          <p style="margin-top:20px;">Adam directed Mr Theatre Comes Home Different, raising money for the Theatre Artists Fund in the UK. The film won a number of awards and was screened at festivals around the world.</p>
+          <p style="margin-top:20px;">Adam loves the mountains, good coffee, and occasionally throwing himself out of things.</p>
+          <div style="text-align:center;margin-top:24px;">
+            <a href="https://adamjacksonsmith.com" target="_blank" style="display:inline-block;font-family:'Inter Tight',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;color:#fff;background:#000;text-decoration:none;padding:10px 20px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">LEARN MORE</a>
+          </div>
+        </div>
+        <div class="bio">
+          <p>Matt has over 20 years experience working in television and film, as a producer/director for national broadcasters including BBC, Channel 4, ITV and Channel 5.</p>
+          <p style="margin-top:20px;">Matt has produced a diverse range of content including primetime documentary, factual entertainment &amp; current affairs programmes, as well as producing highly successful charity campaigns for Comic Relief and Children in Need.</p>
+          <p style="margin-top:20px;">Matt has made several shorts and an independent feature film. He also produced the award-winning Mr Theatre Comes Home Different.</p>
+          <p style="margin-top:20px;">Matt often dabbles in high octane past-times such as gardening and running short distances.</p>
+          <div style="text-align:center;margin-top:24px;">
+            <a href="https://matthewpt.wixsite.com/mattpt" target="_blank" style="display:inline-block;font-family:'Inter Tight',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;color:#fff;background:#000;text-decoration:none;padding:10px 20px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">LEARN MORE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>© PRETTY PUNCHY STAGE &amp; SCREEN</footer>
+  </section>
+
+  <!-- ===================== THE WORK ===================== -->
+  <section id="work" class="section">
+
+    <!-- Hero -->
+    <div class="work-hero">
+      <img src="assets/TrailerThumb.jpg" alt="Mr Theatre Comes Home Different" style="filter:brightness(0.7);">
+      <div class="work-title">
+        <img src="assets/MrTheatreTitle.png" alt="Mr Theatre Comes Home Different" style="width:28vw;max-width:28vw;display:block;">
+      </div>
+    </div>
+
+    <!-- Synopsis -->
+    <div class="synopsis">
+      <p>In 2021, during the Covid lockdown, we worked with Pulitzer-nominated playwright, Will Eno, to adapt his stage monologue for the screen and created <span class="mr-theatre-bold">MR THEATRE COMES HOME DIFFERENT</span>; raising funds for theatre freelancers in the UK.</p>
+      <p>Filmed over two days at the Lyric Hammersmith London, with twelve actors and a skeleton crew, under strict Covid protocols, the film celebrates everyone who works in theatre — both onstage and off — during the pandemic and beyond.</p>
+    </div>
+
+    <!-- Panoramic -->
+    <div class="panoramic">
+      <img src="assets/lyric_panoramic.jpg" alt="Lyric Hammersmith — filming Mr Theatre Comes Home Different">
+    </div>
+
+    <!-- Behind the Scenes Video -->
+    <div class="video-section">
+      <h3>BEHIND THE SCENES</h3>
+      <div class="video-placeholder">
+        VIDEO COMING SOON
+      </div>
+    </div>
+
+    <!-- Poster + Awards -->
+    <div class="poster-awards">
+      <img src="assets/film_poster.png" alt="Mr Theatre Comes Home Different — Film Poster">
+      <div class="awards">
+        <h3>AWARDS &amp; SELECTIONS</h3>
+        <ul>
+          <li><em>Winner</em> of <strong>'Best Lockdown Film'</strong> — Screen Culture Film Festival 2021</li>
+          <li><em>Winner</em> of <strong>'Best Short Film'</strong> — Screen Power Film Festival 2021/22</li>
+          <li><em>Winner</em> of <strong>'Best Acting Ensemble'</strong> — Indie Shorts Awards Cannes</li>
+          <li><em>Nominated</em> for <strong>Best Acting Ensemble</strong> — The British Short Film Awards 2021</li>
+          <li><em><strong>Official Selection</strong></em> — Venezia Shorts Italy, Liverpool Film Festival, London Lift-Off Festival, Berlin Lift-Off Festival, Carmarthen Bay Film Festival, Wonderous Stories Film Festival &amp; Hollywood Shorts Fest</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Credits -->
+    <div class="credits-section">
+      <div class="credits">
+        <h3>CREDITS</h3>
+        <dl>
+          <dt>Written by</dt>
+          <dd>Will Eno</dd>
+          <dt>Directed by</dt>
+          <dd>Adam Jackson-Smith &amp; David Symmons</dd>
+          <dt>Produced by</dt>
+          <dd>Michael Cusick, Adam Jackson-Smith &amp; Matt Pitts-Tucker</dd>
+          <dt>Cast</dt>
+          <dd>Charlotte Arrowsmith, Jenna Boyd, Saffron Coomber, Bethan Cullinane, Michael Cusick, Naeem Hayat, Eliza Hunt, Adam Jackson-Smith, Shelley King, Jonathan Livingstone, Milo Twomey &amp; Samantha Womack</dd>
+        </dl>
+      </div>
+      <div class="credits-img">
+        <img src="assets/stage_credits.jpg" alt="Mr Theatre Comes Home Different — on set at the Lyric Hammersmith">
+      </div>
+    </div>
+
+    <!-- Theatre Artists Fund -->
+    <div class="taf-section">
+      <p class="taf-line1">Let's set the stage again. Together.</p>
+      <p class="taf-line2">SUPPORT THE THEATRE ARTISTS FUND</p>
+    </div>
+
+    <footer>© PRETTY PUNCHY STAGE &amp; SCREEN</footer>
+  </section>
+
+  <!-- ===================== IN DEVELOPMENT — ZOMBSKI ===================== -->
+  <section id="dev" class="section">
+
+    <!-- Hero -->
+    <div style="position:relative;width:100%;overflow:hidden;line-height:0;max-height:80vh;">
+      <img src="assets/zombski_hero.png" alt="ZOMBSKI" style="width:100%;display:block;filter:brightness(0.9);">
+    </div>
+
+    <!-- Copy -->
+    <div style="background:#111;padding:64px 80px;max-width:860px;">
+      <p style="font-size:9px;color:#cc0000;letter-spacing:0.16em;font-weight:700;margin-bottom:24px;">IN DEVELOPMENT — FEATURE FILM — COMEDY HORROR</p>
+
+      <!-- Musical notation opening -->
+      <div style="margin-bottom:36px;">
+        <div style="font-size:14px;color:#555;letter-spacing:0.14em;margin-bottom:6px;">♩ &nbsp;♪ &nbsp;&nbsp;♩ &nbsp;♪ &nbsp;♩ &nbsp;&nbsp;&nbsp;♩ &nbsp;♪ &nbsp;&nbsp;♩ &nbsp;&nbsp;&nbsp;♩ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;♩ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;♩</div>
+        <p style="font-size:22px;font-weight:700;color:#fff;line-height:1.4;margin:0;">It's beginning to look a lot like... <em>Zombies?</em></p>
+      </div>
+
+      <!-- Logline -->
+      <p style="font-size:16px;color:#fff;line-height:1.9;margin:0 0 12px;">A mis-fit young teaching assistant must keep her 'challenging' pupils out of trouble — and alive! — on a school ski trip from Hell in the Highlands.</p>
+      <p style="font-size:16px;color:#fff;font-style:italic;font-weight:700;margin:0 0 36px;">Frostbite is the least of their worries.</p>
+
+      <!-- Synopsis -->
+      <p style="font-size:16px;color:#ccc;line-height:1.9;margin:0 0 20px;"><span style="font-family:'True Lies',sans-serif;font-size:22px;color:#cc0000;letter-spacing:0.04em;">ZOMBSKI</span> is set around the reopening of an old ski resort on the isolated peak of Glen Beira in the Scottish Highlands. Originally built many years ago but long since abandoned, this hidden gem has been shrouded in myth for generations.</p>
+      <p style="font-size:16px;color:#ccc;line-height:1.9;margin:0 0 20px;">Now, just in time for Christmas, Glen Beira is opening up again and one lucky group from 'Second Chances' Pupil Referral Unit have been gifted an all-expenses paid trip to get out of the city and into the wilderness.</p>
+      <p style="font-size:16px;color:#ccc;line-height:1.9;margin:0 0 20px;">Unfortunately, there's a reason the mountain has been dormant for so long; this is the throne of Old Mother Winter — 'Beira' in the ancient tongue.</p>
+      <p style="font-size:16px;color:#fff;line-height:1.9;margin:0 0 20px;">She's awake again. And she'll protect her kingdom at all costs.</p>
+      <p style="font-size:16px;color:#fff;font-style:italic;font-weight:700;margin:0 0 20px;">Zombies. On skis.</p>
+      <p style="font-size:16px;color:#fff;font-weight:700;margin:0;">There's a reason you don't go reopening condemned ski resorts….</p>
+    </div>
+
+    <!-- Zombie photo full width -->
+    <div style="width:100%;line-height:0;">
+      <img src="assets/zombski_zombie.png" alt="ZOMBSKI" style="width:100%;display:block;filter:grayscale(20%);">
+    </div>
+
+    <!-- Two posters side by side -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;background:#000;">
+      <div style="line-height:0;border-right:1px solid #111;">
+        <img src="assets/ZOMBSKI_Poster.png" alt="ZOMBSKI Poster" style="width:100%;display:block;">
+      </div>
+      <div style="line-height:0;">
+        <img src="assets/Sla-argh-lom.png" alt="Sla-argh!-lom" style="width:100%;display:block;">
+      </div>
+    </div>
+
+    <!-- Piste map full width -->
+    <div style="width:100%;line-height:0;">
+      <img src="assets/zombski_piste_map.png" alt="Ski Beira — Piste Map" style="width:100%;display:block;">
+    </div>
+
+    <footer>© PRETTY PUNCHY STAGE &amp; SCREEN</footer>
+  </section>
+
+  <!-- ===================== HIT US UP ===================== -->
+  <section id="contact" class="section" style="overflow:hidden;">
+    <div style="background:var(--orange);padding:48px 80px 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px;">
+
+      <!-- Title -->
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(40px,6vw,72px);color:#fff;letter-spacing:-0.02em;">POW. POW.</h2>
+
+      <!-- Two ski images side by side -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%;max-width:700px;">
+        <div style="line-height:0;">
+          <img src="assets/contact_ski1.png" alt="Retro ski jump" style="width:100%;display:block;border:3px solid #000;">
+        </div>
+        <div style="line-height:0;">
+          <img src="assets/contact_ski2.png" alt="Retro ski jump with husky" style="width:100%;display:block;border:3px solid #000;">
+        </div>
+      </div>
+
+      <!-- Email first, bigger -->
+      <a href="mailto:hello@prettypunchy.com" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(20px,3vw,36px);color:#fff;text-decoration:none;letter-spacing:0.02em;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">hello@prettypunchy.com</a>
+
+      <!-- Copy below email -->
+      <p style="font-family:'Inter Tight',sans-serif;font-size:clamp(16px,2vw,22px);font-weight:400;font-style:italic;color:#000;letter-spacing:0.04em;padding-bottom:48px;">Let's make something.</p>
+
+    </div>
+
+    <!-- Full width black strip with animation -->
+    <div style="background:#000;width:100%;display:flex;justify-content:center;padding:40px 0;position:relative;">
+      <div style="width:560px;max-width:100%;position:relative;">
+        <video id="contact-video" autoplay muted loop playsinline style="width:100%;max-height:320px;display:block;">
+          <source src="assets/PP_animation_ineptic_mix_orange_star_2022.m4v" type="video/mp4">
+        </video>
+        <button id="sound-btn" onclick="toggleSound()" style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.3);color:#fff;font-family:'Inter Tight',sans-serif;font-size:9px;letter-spacing:0.1em;padding:6px 10px;cursor:pointer;transition:background 0.2s;">
+          🔇 UNMUTE
+        </button>
+      </div>
+    </div>
+
+    <footer style="background:var(--orange);border-top:1px solid rgba(0,0,0,0.1);">© PRETTY PUNCHY STAGE &amp; SCREEN</footer>
+  </section>
+
+  <script>
+    // Sound toggle for contact page animation
+    function toggleSound() {
+      const video = document.getElementById('contact-video');
+      const btn = document.getElementById('sound-btn');
+      if (video.muted) {
+        video.muted = false;
+        btn.textContent = '🔊 MUTE';
+      } else {
+        video.muted = true;
+        btn.textContent = '🔇 UNMUTE';
+      }
+    }
+
+    // Section switching
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // Skip animation
+    function skipAnim() {
+      document.getElementById('anim-panel').style.display = 'none';
+    }
+
+    // Auto-hide animation panel when video ends
+    const introVideo = document.getElementById('intro-video');
+    if (introVideo) {
+      introVideo.addEventListener('ended', () => {
+        document.getElementById('anim-panel').style.display = 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
