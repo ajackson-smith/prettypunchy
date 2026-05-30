@@ -847,7 +847,7 @@
 
   <!-- ===================== HIT US UP ===================== -->
   <section id="contact" class="section">
-    <div style="background:var(--orange);min-height:calc(100vh - 64px);padding:48px 80px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px;">
+    <div style="background:var(--orange);padding:48px 80px 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px;">
 
       <!-- Title -->
       <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(40px,6vw,72px);color:#fff;letter-spacing:-0.02em;">POW. POW.</h2>
@@ -866,21 +866,22 @@
       <a href="mailto:hello@prettypunchy.com" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(20px,3vw,36px);color:#fff;text-decoration:none;letter-spacing:0.02em;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">hello@prettypunchy.com</a>
 
       <!-- Copy below email -->
-      <p style="font-family:'Inter Tight',sans-serif;font-size:clamp(16px,2vw,22px);font-weight:700;color:#000;letter-spacing:0.02em;">Let's make something.</p>
-
-      <!-- Animation in full-width black strip, centred -->
-      <div style="width:100vw;margin-left:calc(50% - 50vw);background:#000;display:flex;justify-content:center;padding:40px 0;position:relative;">
-        <div style="width:560px;position:relative;">
-          <video id="contact-video" autoplay muted loop playsinline style="width:100%;display:block;">
-            <source src="assets/PP_animation_ineptic_mix_orange_star_2022.m4v" type="video/mp4">
-          </video>
-          <button id="sound-btn" onclick="toggleSound()" style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.3);color:#fff;font-family:'Inter Tight',sans-serif;font-size:9px;letter-spacing:0.1em;padding:6px 10px;cursor:pointer;transition:background 0.2s;">
-            🔇 UNMUTE
-          </button>
-        </div>
-      </div>
+      <p style="font-family:'Inter Tight',sans-serif;font-size:clamp(16px,2vw,22px);font-weight:700;color:#000;letter-spacing:0.02em;padding-bottom:48px;">Let's make something.</p>
 
     </div>
+
+    <!-- Full width black strip with animation -->
+    <div style="background:#000;width:100%;display:flex;justify-content:center;padding:40px 0;position:relative;">
+      <div style="width:560px;position:relative;">
+        <video id="contact-video" autoplay muted loop playsinline style="width:100%;display:block;">
+          <source src="assets/PP_animation_ineptic_mix_orange_star_2022.m4v" type="video/mp4">
+        </video>
+        <button id="sound-btn" onclick="toggleSound()" style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.3);color:#fff;font-family:'Inter Tight',sans-serif;font-size:9px;letter-spacing:0.1em;padding:6px 10px;cursor:pointer;transition:background 0.2s;">
+          🔇 UNMUTE
+        </button>
+      </div>
+    </div>
+
     <footer style="background:var(--orange);border-top:1px solid rgba(0,0,0,0.1);">© PRETTY PUNCHY STAGE &amp; SCREEN</footer>
   </section>
 
