@@ -850,7 +850,7 @@
     <div style="background:var(--orange);min-height:calc(100vh - 64px);padding:48px 80px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px;">
 
       <!-- Title -->
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(40px,6vw,72px);color:#000;letter-spacing:-0.02em;">POW. POW.</h2>
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(40px,6vw,72px);color:#fff;letter-spacing:-0.02em;">POW. POW.</h2>
 
       <!-- Two ski images side by side -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%;max-width:700px;">
@@ -868,14 +868,16 @@
       <!-- Copy below email -->
       <p style="font-family:'Inter Tight',sans-serif;font-size:clamp(16px,2vw,22px);font-weight:700;color:#000;letter-spacing:0.02em;">Let's make something.</p>
 
-      <!-- Animation full width on black background -->
-      <div style="width:100vw;margin-left:calc(-80px);background:#000;position:relative;">
-        <video id="contact-video" autoplay muted loop playsinline style="width:100%;display:block;">
-          <source src="assets/PP_animation_ineptic_mix_orange_star_2022.m4v" type="video/mp4">
-        </video>
-        <button id="sound-btn" onclick="toggleSound()" style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.3);color:#fff;font-family:'Inter Tight',sans-serif;font-size:9px;letter-spacing:0.1em;padding:6px 10px;cursor:pointer;transition:background 0.2s;">
-          🔇 UNMUTE
-        </button>
+      <!-- Animation in full-width black strip, centred -->
+      <div style="width:100vw;margin-left:calc(-80px);background:#000;display:flex;justify-content:center;padding:40px 0;position:relative;">
+        <div style="width:560px;position:relative;">
+          <video id="contact-video" autoplay muted loop playsinline style="width:100%;display:block;">
+            <source src="assets/PP_animation_ineptic_mix_orange_star_2022.m4v" type="video/mp4">
+          </video>
+          <button id="sound-btn" onclick="toggleSound()" style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.3);color:#fff;font-family:'Inter Tight',sans-serif;font-size:9px;letter-spacing:0.1em;padding:6px 10px;cursor:pointer;transition:background 0.2s;">
+            🔇 UNMUTE
+          </button>
+        </div>
       </div>
 
     </div>
