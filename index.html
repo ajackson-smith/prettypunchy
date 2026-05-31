@@ -333,12 +333,15 @@
       min-height: calc(100vh - 64px);
     }
 
-    #about .polaroid-grid {
+    /* Desktop: 2-col grid — photo | bio, photo | bio */
+    #about .person-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 48px;
-      margin-bottom: 48px;
+      align-items: start;
     }
+
+    #about .person-photo { }
 
     #about .polaroid {
       background: var(--white);
@@ -365,12 +368,6 @@
       margin-top: 20px;
       letter-spacing: 0.04em;
       white-space: nowrap;
-    }
-
-    #about .bio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
     }
 
     #about .bio {
@@ -686,15 +683,16 @@
 
       /* --- ABOUT --- */
       #about .about-inner { padding: 32px 24px 48px; }
-      #about .polaroid-grid {
+      /* Stack: photo → bio → photo → bio */
+      #about .person-grid {
         grid-template-columns: 1fr;
         gap: 32px;
-        margin-bottom: 32px;
       }
       #about .polaroid { max-width: 320px; }
       #about .polaroid img { max-height: 320px; }
-      #about .bio-grid { grid-template-columns: 1fr; gap: 40px; }
       #about .bio p { font-size: 15px; }
+      /* Add top spacing between Matt's photo and Adam's bio */
+      #about .person-photo + .bio + .person-photo { margin-top: 16px; }
 
       /* --- THE WORK --- */
       #work .work-title {
@@ -881,21 +879,14 @@
         <img src="assets/PP_logo_white.svg" alt="Pretty Punchy Stage & Screen" style="height:200px;display:block;">
       </div>
 
-      <div class="polaroid-grid">
-        <div>
+      <div class="person-grid">
+        <!-- Adam -->
+        <div class="person-photo">
           <div class="polaroid">
             <img src="assets/AJS.webp" alt="Adam Jackson-Smith">
             <p class="name">ADAM JACKSON-SMITH</p>
           </div>
         </div>
-        <div>
-          <div class="polaroid">
-            <img src="assets/MPT.webp" alt="Matt Pitts-Tucker">
-            <p class="name">MATT PITTS-TUCKER</p>
-          </div>
-        </div>
-      </div>
-      <div class="bio-grid">
         <div class="bio">
           <p>Adam is an actor, writer &amp; director. He trained at RADA and has been working on Stage &amp; Screen for over fifteen years.</p>
           <p style="margin-top:20px;">Adam originated the role of Basil Fawlty in the West End production of John Cleese's Fawlty Towers: The Play and is currently working on the follow up. Other credits include Outlander, FBI: International, The Unlikely Pilgrimage of Harold Fry, and Master Of None.</p>
@@ -903,6 +894,13 @@
           <p style="margin-top:20px;">Adam loves the mountains, good coffee, and occasionally throwing himself out of things.</p>
           <div style="text-align:center;margin-top:24px;">
             <a href="https://adamjacksonsmith.com" target="_blank" style="display:inline-block;font-family:'Inter Tight',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;color:#fff;background:#000;text-decoration:none;padding:10px 20px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">LEARN MORE</a>
+          </div>
+        </div>
+        <!-- Matt -->
+        <div class="person-photo">
+          <div class="polaroid">
+            <img src="assets/MPT.webp" alt="Matt Pitts-Tucker">
+            <p class="name">MATT PITTS-TUCKER</p>
           </div>
         </div>
         <div class="bio">
