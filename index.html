@@ -570,22 +570,121 @@
 
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 768px) {
-      #who { padding: 48px 24px; }
-      #cards { grid-template-columns: 1fr; }
-      .card:first-child { border-right: none; border-bottom: 1px solid #222; }
-      #about .about-inner { padding: 48px 24px; }
-      #about .polaroid-grid, #about .bio-grid { grid-template-columns: 1fr; }
-      #work .synopsis { padding: 48px 24px; }
-      #work .poster-awards { grid-template-columns: 1fr; padding: 48px 24px; }
-      #work .credits-section { grid-template-columns: 1fr; padding: 48px 24px; }
-      #work .taf-section { padding: 48px 24px; }
-      #contact .contact-inner { padding: 48px 24px; }
-    }
 
-    @media (max-width: 900px) {
-      #dev .synopsis-grid { grid-template-columns: 1fr !important; }
-      #dev .synopsis-grid .synopsis-img { padding: 0 48px 48px !important; }
-      #dev .synopsis-grid .synopsis-img img { max-height: 300px; object-fit: cover; }
+      /* --- NAV --- */
+      nav {
+        padding: 0 16px;
+        height: 56px;
+      }
+      nav .logo svg { height: 22px; }
+      nav .links { gap: 10px; }
+      nav .links a { font-size: 11px; letter-spacing: 0.04em; }
+      nav .links a.cta { padding: 4px 8px; }
+      .section { padding-top: 56px; }
+
+      /* --- HOME: HERO --- */
+      #hero .starburst { width: 95vw; height: 95vw; }
+      #hero .starburst-wrap { height: auto; padding: 40px 0 20px; }
+      #hero .title-wrap { padding: 32px 24px 48px; }
+      #hero .pretty, #hero .punchy { font-size: clamp(60px, 18vw, 100px); }
+      #hero .stage-screen { font-size: clamp(18px, 5.5vw, 32px); }
+      #hero .tagline { font-size: clamp(16px, 4vw, 20px); }
+
+      /* --- HOME: WHO WE ARE --- */
+      #who { padding: 40px 24px; }
+      #who p { font-size: 17px; line-height: 1.8; }
+
+      /* --- HOME: PROJECT CARDS --- */
+      #cards { grid-template-columns: 1fr; }
+      .card { padding: 32px 24px; }
+      .card:first-child { border-right: none; border-bottom: 1px solid #222; }
+      .card h3 { font-size: 24px; }
+
+      /* --- HOME: CTA --- */
+      #home-cta { padding: 40px 24px; }
+
+      /* --- ABOUT --- */
+      #about .about-inner { padding: 32px 24px 48px; }
+      #about .polaroid-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+      #about .polaroid { max-width: 320px; }
+      #about .polaroid img { max-height: 320px; }
+      #about .bio-grid { grid-template-columns: 1fr; gap: 40px; }
+      #about .bio p { font-size: 15px; }
+
+      /* --- THE WORK --- */
+      #work .work-title {
+        width: 70vw !important;
+        max-width: 70vw !important;
+        top: 24%;
+      }
+      #work .work-title img {
+        width: 70vw !important;
+        max-width: 70vw !important;
+      }
+      #work .synopsis { padding: 40px 24px; }
+      #work .synopsis p { font-size: 16px; }
+      #work .video-section { padding: 40px 24px; }
+      #work .poster-awards {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 40px;
+      }
+      #work .poster-awards img { max-width: 240px; margin: 0 auto; }
+      #work .awards ul li { font-size: 15px; }
+      #work .credits-section {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 40px;
+      }
+      #work .taf-section { padding: 40px 24px; }
+      #work .taf-section p.taf-line1 { font-size: 17px; }
+      #work .taf-section p.taf-line2 { font-size: 15px; }
+
+      /* --- IN DEVELOPMENT (ZOMBSKI) --- */
+      /* Logline block */
+      #dev [style*="padding:64px 80px"] {
+        padding: 40px 24px !important;
+      }
+      /* Synopsis: stack image below text */
+      #dev [style*="display:flex;gap:48px"] {
+        flex-direction: column !important;
+        padding: 40px 24px !important;
+        gap: 32px !important;
+      }
+      #dev [style*="flex:35"] {
+        max-height: 280px;
+        overflow: hidden;
+      }
+      /* Zombski image grid: single column */
+      #dev [style*="grid-template-columns:1fr 1fr 1fr"] {
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto !important;
+      }
+      #dev [style*="grid-row:1/3"] {
+        grid-row: auto !important;
+        grid-column: auto !important;
+      }
+      /* Synopsis text block */
+      #dev [style*="background:#111;padding:48px 80px"] {
+        padding: 40px 24px !important;
+      }
+
+      /* --- CONTACT --- */
+      #contact [style*="padding:48px 80px"] {
+        padding: 40px 24px 0 !important;
+      }
+      #contact [style*="grid-template-columns:1fr 1fr;gap:24px"] {
+        grid-template-columns: 1fr 1fr !important;
+        max-width: 100% !important;
+        gap: 12px !important;
+      }
+
+      /* --- FOOTER --- */
+      footer { font-size: 9px; padding: 14px 16px; }
     }
   </style>
 </head>
