@@ -748,6 +748,12 @@
       }
       /* Show 6th image on mobile to fill grid */
       .mobile-grid-extra { display: block !important; }
+      /* Hide synopsis skis image on mobile */
+      .synopsis-skis-img { display: none !important; }
+      /* Add padding so synopsis doesn't butt up against piste map */
+      #dev [style*="display:flex;gap:48px"] {
+        padding-bottom: 48px !important;
+      }
 
       /* Zombski image grid: single column */
       #dev [style*="grid-template-columns:1fr 1fr 1fr"] {
@@ -1060,7 +1066,7 @@
         <p style="font-size:18px;color:#fff;margin:0;">All they want for Christmas is <strong>you.</strong></p>
       </div>
       <!-- Image: 35% -->
-      <div style="flex:35;min-width:0;line-height:0;">
+      <div class="synopsis-skis-img" style="flex:35;min-width:0;line-height:0;">
         <img src="assets/zombski_skis.png" alt="Zombski skis" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
