@@ -732,7 +732,11 @@
         padding: 40px 24px !important;
       }
       /* Musical line image — full width on mobile */
-      #dev [style*="musical_line"] { width: 100% !important; }
+      #dev [style*="musical_line"] { width: 100% !important; max-width: 100% !important; }
+      /* Reduce logline side padding on mobile so image has full width */
+      #dev [style*="padding:64px 80px"] {
+        padding: 40px 8px !important;
+      }
 
       /* Shrink red tag to fit one line */
       #dev [style*="font-size:12px;color:#cc0000"] {
