@@ -73,6 +73,88 @@
       padding: 4px 12px;
     }
 
+    /* Hamburger button — hidden on desktop */
+    .nav-hamburger {
+      display: none;
+      margin-left: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--orange);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    /* Animate hamburger to X when open */
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Full-screen overlay menu */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      top: 56px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--black);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+    }
+
+    .nav-overlay a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 20px 0;
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid #1a1a1a;
+      transition: color 0.2s;
+    }
+
+    .nav-overlay a:first-child {
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .nav-overlay a.cta {
+      color: var(--orange);
+    }
+
+    .nav-overlay a:active {
+      color: var(--orange);
+    }
+
     /* ===================== SECTIONS ===================== */
     .section { display: none; min-height: 100vh; padding-top: 64px; }
     .section.active { display: block; }
@@ -573,13 +655,12 @@
 
       /* --- NAV --- */
       nav {
-        padding: 0 16px;
+        padding: 0 20px;
         height: 56px;
       }
       nav .logo svg { height: 22px; }
-      nav .links { gap: 10px; }
-      nav .links a { font-size: 11px; letter-spacing: 0.04em; }
-      nav .links a.cta { padding: 4px 8px; }
+      nav .links { display: none; }
+      .nav-hamburger { display: flex; }
       .section { padding-top: 56px; }
 
       /* --- HOME: HERO --- */
@@ -690,6 +771,14 @@
 </head>
 <body>
 
+  <!-- Mobile nav overlay -->
+  <div class="nav-overlay" id="nav-overlay">
+    <a href="#" onclick="navTo('about')">About Us</a>
+    <a href="#" onclick="navTo('work')">The Work</a>
+    <a href="#" onclick="navTo('dev')">In Development</a>
+    <a href="#" onclick="navTo('contact')" class="cta">Hit Us Up</a>
+  </div>
+
   <!-- ===================== NAV ===================== -->
   <nav>
     <div class="logo" onclick="showSection('home')" style="cursor:pointer;">
@@ -720,6 +809,11 @@
       <a href="#" onclick="showSection('dev');return false;">IN DEVELOPMENT</a>
       <a href="#" onclick="showSection('contact');return false;" class="cta">HIT US UP</a>
     </div>
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
 
   <!-- ===================== HOME ===================== -->
@@ -1020,6 +1114,32 @@
         video.muted = true;
         btn.textContent = '🔇 UNMUTE';
       }
+    }
+
+    // Hamburger menu toggle
+    function toggleMenu() {
+      const overlay = document.getElementById('nav-overlay');
+      const btn = document.getElementById('nav-hamburger');
+      const isOpen = overlay.classList.contains('open');
+      if (isOpen) {
+        overlay.classList.remove('open');
+        btn.classList.remove('open');
+        setTimeout(() => { overlay.style.display = 'none'; }, 250);
+      } else {
+        overlay.style.display = 'flex';
+        requestAnimationFrame(() => overlay.classList.add('open'));
+        btn.classList.add('open');
+      }
+    }
+
+    // Navigate from mobile overlay menu
+    function navTo(id) {
+      const overlay = document.getElementById('nav-overlay');
+      const btn = document.getElementById('nav-hamburger');
+      overlay.classList.remove('open');
+      btn.classList.remove('open');
+      setTimeout(() => { overlay.style.display = 'none'; }, 250);
+      showSection(id);
     }
 
     // Section switching
