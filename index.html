@@ -731,6 +731,9 @@
       #dev [style*="padding:64px 80px"] {
         padding: 40px 24px !important;
       }
+      /* Musical line image — full width on mobile */
+      #dev [style*="musical_line"] { width: 100% !important; }
+
       /* Shrink red tag to fit one line */
       #dev [style*="font-size:12px;color:#cc0000"] {
         font-size: 9px !important;
@@ -1028,9 +1031,8 @@
       <p style="font-size:12px;color:#cc0000;letter-spacing:0.16em;font-weight:700;margin-bottom:24px;">IN DEVELOPMENT — FEATURE FILM — COMEDY HORROR</p>
 
       <!-- Musical notation opening -->
-      <div style="margin-bottom:36px;">
-        <div style="font-size:14px;color:#555;letter-spacing:0.14em;margin-bottom:6px;">♩ &nbsp;♪ &nbsp;&nbsp;♩ &nbsp;♪ &nbsp;♩ &nbsp;&nbsp;&nbsp;♩ &nbsp;♪ &nbsp;&nbsp;♩ &nbsp;&nbsp;&nbsp;♩ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;♩ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;♩</div>
-        <p style="font-size:22px;font-weight:700;color:#fff;line-height:1.4;margin:0;">It's beginning to look a lot like... <em>Zombies?</em></p>
+      <div style="margin-bottom:36px;display:flex;justify-content:center;">
+        <img src="assets/musical_line.png" alt="It's beginning to look a lot like... Zombies?" style="width:80%;max-width:680px;display:block;">
       </div>
 
       <p style="font-size:18px;color:#fff;line-height:1.9;margin:0 0 12px;">A mis-fit young teaching assistant must keep her 'challenging' pupils out of trouble<br>— and alive! —<br>on a school ski trip from Hell in the Highlands.</p>
